@@ -1,1 +1,103 @@
-/* You can add global styles to this file, and also import other style files */
+body{
+
+  background-image: url("src\assets\images\bg_login.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  top:0px;
+  left:0px;
+  width: 100%;
+  height: 100%;
+
+  margin: 0;
+  font-family: 'Roboto','Helvetica','Arial',sans-serif;
+
+  /* overflow-y: hidden; */
+}
+
+
+*::-webkit-scrollbar {
+  width: 9px;
+  height: 8px;
+  background-color: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 30%);
+  background-color: rgba(3,169,244,.8);
+}
+
+*::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 30%);
+  border-radius: 10px;
+  background-color: transparent;
+  visibility: hidden;
+}
+
+/* Scrollbar para Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(3,169,244,.8) transparent;
+}
+
+
+.icono-ayuda{
+  font-size: 1rem !important;
+  vertical-align: top !important;
+}
+
+.common-button{
+  background-color: rgba(31, 115, 182, .8);
+  color: white;
+}
+
+/* Estilos globales */
+
+.icono-cuadrado-azul{
+  border:none;
+  background-color: rgba(31,115,182,.8);
+  border-radius: 0.2rem;
+  height:34px;
+  width:34px;
+  margin: 0.8rem 0.8rem 0.8rem 0.8rem;
+  vertical-align: middle;
+  color: white;
+}
+
+.icono-cuadrado-azul > mat-icon{
+  vertical-align: middle;
+}
+
+.icono-cuadrado-negro{
+  border:none;
+  background-color: rgba(42, 42, 42, 0.62);
+  border-radius: 0.2rem;
+  height:34px;
+  width:34px;
+  margin: 0.8rem 0.2rem 0.8rem 0.8rem;
+
+  vertical-align: middle;
+  font-size: 1.4rem;
+  color: white;
+}
+
+
+
+
+/* Ediciones componentes / angular Material */
+
+/* Tamaño de checkbox */
+.mat-checkbox .mat-checkbox-inner-container {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+/* Espacio entre radiobuttons */
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 1rem;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+

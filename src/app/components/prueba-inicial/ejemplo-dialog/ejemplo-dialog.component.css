@@ -1,0 +1,50 @@
+.close-button{
+  float: right;
+  top:-24px;
+  right:-24px;
+  background-color: #f4f4f4;
+  box-shadow: none;
+  border: 2px solid #bbbbbb;
+}
+
+.close-icon {
+  transition: 1s ease-in-out;
+  color: gray;
+}
+
+.close-icon:hover {
+  transform: rotate(180deg);
+  color: gray;
+}
+
+::ng-deep .icon-outside .close-button{
+  float: right;
+  top:-45px;
+  right:-45px;
+}
+
+::ng-deep .icon-outside .mat-dialog-container {
+  overflow: unset;
+ }
+
+
+/* Dialog titulo */
+
+.dialog-title{
+  font-size: 15px;
+  border-bottom: 1.5px solid #bebebe;
+}
+
+
+.titulo-icono{
+  font-size: 50px;
+  vertical-align: middle;
+  color: rgb(76, 143, 197);
+}
+
+
+h1{
+  font-size: 19px;
+  padding-left: 35px;
+}
+

@@ -1,0 +1,22 @@
+<button mat-mini-fab aria-label="close dialog" class="close-button" [mat-dialog-close]="false">
+  <mat-icon class="close-icon">close</mat-icon>
+</button>
+
+
+<div mat-dialog-title class="dialog-title">
+  <h1>Titulo del dialog</h1>
+</div>
+
+
+<div mat-dialog-content>
+
+  <p>
+    Cuerpo del dialogo, datos recibidos: {{datos}}
+  </p>
+
+</div>
+
+<div mat-dialog-actions align="center">
+  <button class="common-button" mat-flat-button [mat-dialog-close]="'Click en Aceptar'">ACEPTAR</button>
+  <button class="common-button" mat-flat-button [mat-dialog-close]="'Click en CANCELAR'">CANCELAR</button>
+</div>

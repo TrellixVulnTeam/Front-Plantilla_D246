@@ -1,0 +1,72 @@
+/* General */
+:host::ng-deep  {
+  height: 100%;
+  width: 100%;
+  /* background-color: rgb(255, 204, 204); */
+  display: block;
+}
+
+.row{
+  margin: 0;
+}
+
+
+/* Cabecera */
+
+    /*    Titulo */
+
+.titulo{
+  background-color: white;
+  height: 100%;
+  font-size: 1.5rem;
+  padding: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.titulo span::after{
+  content: '';
+  width: 120px;
+  height: 2px;
+  margin-left: 20px;
+  border-radius: 2px;
+  background: #5D89C1;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+
+/* Formulario */
+
+.formulario{
+  /* background-color: rgb(177, 208, 255); */
+  background-color: white;
+  padding: 20px;
+  width: 99%;
+  height: 92%;
+  width: calc(100% - 5px);
+  height: calc(100% - 70px);
+  border-radius: 0 5px 5px 5px;
+}
+
+/* Especialidades lista */
+
+.lista-especialidades{
+  height: 500px;
+  /* height: calc(100% - 100px); */
+  overflow-y: auto;
+  border: 2px solid #e1e1e1;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+}
+
+
+/* Reduzco el tamaño de los items en la lista */
+
+:host::ng-deep .mat-list-item {
+  height: 30px !important;
+}
+
+:host::ng-deep .mat-list-item .mat-list-item-content {
+  height: 30px !important;
+}

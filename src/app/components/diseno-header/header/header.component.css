@@ -1,0 +1,46 @@
+:host{
+  /* background-color: rgb(245, 182, 182); */
+  background-color: white;
+  display: block;
+}
+
+
+.row{
+  margin: 0;
+  padding: 0 15px 0 70px;
+}
+
+.matField{
+  width: 100%;
+  font-size: 14px;
+  /* border: 2px solid green; */
+}
+
+.top-options{
+  margin-bottom: -10px;
+  padding-top: 10px;
+}
+
+.icono-modulo{
+  background-color: #1a5761;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 22px 10px;
+  width: 60px;
+  height: 109px;
+}
+
+img{
+  border: 0;
+  vertical-align: middle;
+  border-style: none;
+}
+.img-responsive{
+
+  display: block;
+  max-width: 100%;
+  height: auto;
+
+
+}

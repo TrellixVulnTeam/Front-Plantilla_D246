@@ -1,0 +1,15 @@
+<div class="contenedor">
+
+<div class="buscador">
+  <mat-form-field class="w-25" color="primary">
+    <mat-label>Profesional asistencial</mat-label>
+    <input matInput type="text">
+    <mat-icon class="icono-ayuda" color="primary" matSuffix matTooltip="Mensaje de ayuda" matTooltipPosition="above">help</mat-icon>
+  </mat-form-field>
+</div>
+
+<div class="calendar">
+  <full-calendar #calendar [deepChangeDetection]="true"  [options]="calendarOptions"></full-calendar>
+</div>
+
+</div>
