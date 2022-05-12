@@ -1,0 +1,83 @@
+<button mat-mini-fab aria-label="close dialog" class="close-button" [mat-dialog-close]="false">
+  <mat-icon class="close-icon">close</mat-icon>
+</button>
+
+
+<div mat-dialog-title class="dialog-title">
+  <h1>AUTORIZACIONES</h1>
+</div>
+
+
+<mat-dialog-content>
+
+  <form [formGroup]="formAutorizaciones">
+
+    <!-- <div class="row align-items-center mb-2">
+      <mat-label class="matField nonCheckboxField">
+        <p> :&ensp;
+          <mat-radio-group  color="primary" formControlName="pregunta1" >
+            <mat-radio-button value="true">Sí</mat-radio-button>
+            <mat-radio-button value="false">No</mat-radio-button>
+          </mat-radio-group>
+        </p>
+        <p>
+          De no ser posible el descuento en la forma descrita anteriormente, me comprometo a realizar los pagos a que
+          haya lugar de manera directa
+        </p>
+      </mat-label>
+    </div> -->
+
+
+    <div class="row align-items-center mb-2">
+      <mat-checkbox class="matField" color="primary" formControlName="pregunta1">
+        1. Autorizo el descuento por nómina y/o de mi mesada del Fondo Pensional de la UN (según sea el caso), por cualquier deuda que sea generada con fundamento en la normatividad aplicable, en la prestación del servicio de salud a mi o a cualquier integrante de mi grupo familiar inscrito
+      </mat-checkbox>
+    </div>
+
+
+
+    <div class="row align-items-center mb-2">
+      <mat-checkbox class="matField" color="primary" formControlName="pregunta2">
+        2. Autorizo a Unisalud para que solicite y obtenga datos y copias de mi historia clínica y la de mis beneficios
+      </mat-checkbox>
+    </div>
+
+    <div class="row align-items-center mb-2">
+      <mat-checkbox class="matField" color="primary" formControlName="pregunta3">
+        3. Autorizo a Unisalud para que reporte la información que se genere en virtud de la afiliación o novedad reportada, a las bases de datos de los actores que hace parte del Sistema General de Seguridad Social, así como a las entidades públicas que por sus funciones la requieran.
+      </mat-checkbox>
+    </div>
+
+    <!-- <div class="row align-items-center mb-2">
+      <mat-label class="matField nonCheckboxField">
+        <p>4. Autorizo a Unisalud para que me sean remitidas notificaciones vía correo electrónico:&ensp;
+          <mat-radio-group  color="primary" formControlName="pregunta4">
+            <mat-radio-button [value]="true">Sí</mat-radio-button>
+            <mat-radio-button [value]="false">No</mat-radio-button>
+
+          </mat-radio-group>
+        </p>
+      </mat-label>
+    </div> -->
+
+    <div class="row align-items-center mb-2">
+      <mat-checkbox class="matField" color="primary" formControlName="pregunta4">
+        4. Autorizo a Unisalud para que me sean remitidas notificaciones vía correo electrónico
+      </mat-checkbox>
+    </div>
+
+    <div class="row align-items-center">
+      <mat-checkbox class="matField" color="primary" formControlName="pregunta5">
+        5. Autorizo el tratamiento de mis datos personales de acuerdo a lo establecido en la Ley 1581 de 2012, el Decreto 1377 de 2013 y  las normas concordantes que actualicen, modifiquen o deroguen
+      </mat-checkbox>
+    </div>
+
+  </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <!-- <button mat-flat-button [mat-dialog-close]="true" color="primary">Guardar</button> -->
+  <button mat-flat-button [mat-dialog-close]="false" color="accent">No acepto</button>
+  <button mat-flat-button [disabled]="formAutorizaciones.invalid" [mat-dialog-close]="true" cdkFocusInitial color="primary">Acepto</button>
+</mat-dialog-actions>

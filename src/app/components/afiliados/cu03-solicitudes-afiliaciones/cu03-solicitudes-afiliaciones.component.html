@@ -1,0 +1,249 @@
+<div class="formulario ">
+
+  <!-- <div class="row">
+
+
+  </div> -->
+
+
+  <div class="row row-info">
+
+    <div class="col-12 p-0">
+      <div class="row">
+        <h5>Solicitudes de afiliación</h5>
+      </div>
+
+      <div class="row justify-content-end">
+
+        <!-- <button mat-flat-button style="margin-right: 20px;" color="primary" >
+          listaAfiliadosFiltro
+        </button> -->
+
+        <!-- CU8 -->
+        <!-- (CU7) -->
+        <!-- (CU6) -->
+        <!-- (CU4) -->
+         <!--<button mat-flat-button style="margin-right: 20px;" color="primary">
+          Autorizaciones
+        </button>
+        <button mat-flat-button style="margin-right: 20px;" color="primary">
+          Declaracion juramento
+        </button>
+        <button mat-flat-button style="margin-right: 20px;" color="primary">
+          Declaratoria salud
+        </button>
+        <button mat-flat-button style="margin-right: 20px;" color="primary">
+          Consentimiento de datos
+        </button> -->
+        <button mat-flat-button color="primary" (click)="crearSolicitud()">Crear solicitud</button>
+
+      </div>
+
+      <!-- Filtros -->
+      <div class="row justify-content-end pt-2">
+
+        <div class="col-2">
+          <mat-form-field class="w-100">
+            <mat-label>Filtrar por...</mat-label>
+            <mat-select [(ngModel)]="filtrarPor" (valueChange)="resetFilters()">
+              <mat-option [value]="0">Nombre y apellido</mat-option>
+              <mat-option [value]="1">Forma de solicitud</mat-option>
+              <mat-option [value]="2">Estado de solicitud</mat-option>
+            </mat-select>
+            <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Mensaje de ayuda"
+              matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+
+        <ng-container [ngTemplateOutlet]="
+          filtrarPor == 0 ? filtroNombre :
+          filtrarPor == 1 ? filtroSolicitud : filtroEstado">
+        </ng-container>
+
+        <ng-template #filtroNombre>
+          <div class="col-3">
+            <mat-form-field class="w-100">
+              <!-- filtroNombre  (keyup)="filtrarPorNombre($event)"-->
+              <input matInput type="text" [(ngModel)]="filtroNombreValue" (keyup)="filtrarPorNombre()">
+              <mat-label>Ingrese el nombre</mat-label>
+              <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Mensaje de ayuda"
+                matTooltipPosition="above" (click)="null">
+                <mat-icon>help</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+        </ng-template>
+
+        <ng-template #filtroSolicitud>
+          <div class="col-3">
+            <mat-form-field class="w-100">
+              <mat-label>Seleccione un tipo</mat-label>
+              <mat-select [(ngModel)]="filtroSolicitudValue" (valueChange)="filtrarTipoSolicitud($event)">
+                <mat-option>Todos</mat-option>
+                <mat-option [value]="0">Web</mat-option>
+                <mat-option [value]="1">Físico</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </ng-template>
+
+        <ng-template #filtroEstado>
+          <div class="col-3">
+            <mat-form-field class="w-100">
+              <mat-label>Seleccione un estado</mat-label>
+              <mat-select [(ngModel)]="filtroEstadoValue" (valueChange)="filtrarEstadoSolicitud($event)">
+                <mat-option>Todos</mat-option>
+                <mat-option [value]="0">Guardar</mat-option>
+                <mat-option [value]="1">Generar</mat-option>
+                <mat-option [value]="2">Validar</mat-option>
+                <mat-option [value]="3">Aceptar</mat-option>
+                <mat-option [value]="4">Aprobar</mat-option>
+                <mat-option [value]="5">Rechazar</mat-option>
+                <mat-option [value]="6">Soporte</mat-option>
+                <mat-option [value]="7">Novedades</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </ng-template>
+
+
+      </div>
+
+      <div class="row w-100 table-row ">
+
+        <div class="col-12">
+
+          <div class="mat-elevation-z8 w-100">
+            <!-- (matSortChange)="sortData($event)" -->
+            <table mat-table [dataSource]="dataSource" matSort matSortDisableClear>
+
+              <!-- Columna -->
+              <ng-container matColumnDef="fechaCreacion">
+                <th mat-header-cell class="col-fecha" mat-sort-header *matHeaderCellDef> FECHA CREACIÓN </th>
+                <!-- </th> -->
+                <td mat-cell *matCellDef="let element; let i=index">
+                  <!-- {{ listaAfiliadosFiltro[0].fE_FECHAINICIOSER_AFIL}}   -->
+                  {{element.cotizante.fE_FECHACREACION_AFIL | customDate}}
+                </td>
+              </ng-container>
+
+              <!-- {{element.fechaCreacion}} -->
+              <!-- Columna -->
+              <ng-container matColumnDef="fechaSolicitud">
+                <th mat-header-cell class="col-fecha" mat-sort-header *matHeaderCellDef> FECHA DE SOLICITUD </th>
+                <!-- </th> -->
+                <td mat-cell *matCellDef="let element; let i=index">
+                  <!-- {{element.fechaSolicitud}} -->
+                  {{element.cotizante.fE_FECHASOLICITUD_AFIL | customDate}}
+                </td>
+              </ng-container>
+
+              <!-- Columna -->
+              <ng-container matColumnDef="fechaInicioServicio">
+                <th mat-header-cell class="col-fecha" mat-sort-header *matHeaderCellDef> FECHA DE INICIO DE SERVICIO </th>
+                <!-- </th> -->
+                <td mat-cell *matCellDef="let element; let i=index">
+                  <!-- {{element.fechaInicioServicio}} -->
+                  {{element.cotizante.fE_FECHAINICIOSER_AFIL | customDate}}
+                </td>
+              </ng-container>
+
+              <!-- Columna -->
+              <ng-container matColumnDef="nombres">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> NOMBRE Y APELLIDO </th>
+                <!-- </th> -->
+                <td mat-cell *matCellDef="let element; let i=index">
+                  {{element.cotizante.tX_PRIMNOMBRE_AFIL}} {{element.cotizante.tX_PRIMAPELLI_AFIL}}
+                </td>
+              </ng-container>
+
+              <!-- Columna -->
+              <ng-container matColumnDef="formaSolicitud">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> FORMA SOLICITUD </th>
+                <!-- </th> -->
+                <td mat-cell *matCellDef="let element; let i=index">
+                  <div *ngIf="element.cotizante.tX_FORMASOLICITUD_AFIL == 0;">Web</div>
+                  <div *ngIf="element.cotizante.tX_FORMASOLICITUD_AFIL == 1;">Físico</div>
+                </td>
+              </ng-container>
+
+              <!-- Columna -->
+              <ng-container matColumnDef="estadoSolicitud">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> ESTADO DE SOLICITUD</th>
+                <!-- </th> -->
+                <td mat-cell *matCellDef="let element; let i=index">
+                  <!-- {{element.estadoSolicitud}} -->
+                  <div *ngIf="element.cotizante.nU_ESTADO_AFIL == 0;">Guardar</div>
+                  <div *ngIf="element.cotizante.nU_ESTADO_AFIL == 1;">Generar</div>
+                  <div *ngIf="element.cotizante.nU_ESTADO_AFIL == 2;">Validar</div>
+                  <div *ngIf="element.cotizante.nU_ESTADO_AFIL == 3;">Aceptar</div>
+                  <div *ngIf="element.cotizante.nU_ESTADO_AFIL == 4;">Aprobar</div>
+                  <div *ngIf="element.cotizante.nU_ESTADO_AFIL == 5;">Rechazar</div>
+                  <div *ngIf="element.cotizante.nU_ESTADO_AFIL == 6;">Soporte</div>
+                  <div *ngIf="element.cotizante.nU_ESTADO_AFIL == 7;">Novedades</div>
+                  <!-- {{}} -->
+                </td>
+              </ng-container>
+
+              <!-- Sedes y Editar Columns -->
+              <ng-container matColumnDef="opciones">
+                <!-- width="20%" -->
+                <th mat-header-cell *matHeaderCellDef> OPCIONES </th>
+                <td mat-cell *matCellDef="let element; let i=index">
+
+                  <div class="btn-opciones">
+
+                    <button mat-flat-button color="primary" (click)="dialogEditarAfiliad(element)"
+                      [ngStyle]="{'backgroundColor': (element.cotizante.nU_ESTADO_AFIL == 0) ? '#0277BD' : '#5B7A8C'}">
+                      Editar
+                    </button>
+                    <button mat-flat-button color="primary">
+                      Ver
+                    </button>
+                    <button mat-flat-button color="primary" (click)="dialogValidarAfiliado(element)"
+                      [ngStyle]="{'backgroundColor': (element.cotizante.tipoUsuario==0) ? '#0277BD' : '#5B7A8C'}">
+                      Validar
+                    </button>
+
+                    <button mat-flat-button color="primary" (click)="dialogAceptarDocsAfiliado(element)"
+                      [ngStyle]="{'backgroundColor': (element.cotizante.tipoUsuario==0) ? '#0277BD' : '#5B7A8C'}">
+                      Aceptar
+                    </button>
+
+                    <button mat-flat-button color="primary" (click)="dialogAprobarAfiliado(element)"
+                      [ngStyle]="{'backgroundColor': (element.cotizante.tipoUsuario==0) ? '#0277BD' : '#5B7A8C'}">
+                      Aprobar
+                    </button>
+                    <button mat-flat-button color="primary" (click)="dialogRechazarAfiliado(element)"
+                      [ngStyle]="{'backgroundColor': (element.cotizante.tipoUsuario==0) ? '#0277BD' : '#5B7A8C'}">
+                      Rechazar
+                    </button>
+                    <button mat-flat-button color="primary" (click)="dialogSoporteAfiliado(element)"
+                      [ngStyle]="{'backgroundColor': (element.cotizante.tipoUsuario==0) ? '#0277BD' : '#5B7A8C'}">
+                      Soporte
+                    </button>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator [length]="listaAfiliadosFiltro.length" [pageSizeOptions]="numeroPaginas" showFirstLastButtons
+              aria-label="Seleccionar página">
+            </mat-paginator>
+            <div *ngIf="listaAfiliadosFiltro.length > 0">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+</div>
+
+  </div>
+</div>

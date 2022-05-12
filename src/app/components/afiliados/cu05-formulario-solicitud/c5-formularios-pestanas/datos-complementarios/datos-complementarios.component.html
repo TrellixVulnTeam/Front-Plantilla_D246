@@ -1,0 +1,320 @@
+<ng-container [formGroup]="formularioAfiliados">
+  <div class="form-fields">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-6 col-lg-4">
+          <mat-form-field class="w-100">
+            <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Hello world"
+              matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-label>Orientación sexual</mat-label>
+            <mat-select formControlName="TX_ORIENTACIONAFIL_AFIL">
+              <mat-option *ngFor="let datoActual  of orientacionSexualLst?.data
+                let i = index" [value]="datoActual.idPosition" [disabled]="!datoActual.habilitado">
+                {{datoActual.txValor}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="formularioAfiliados.get('TX_ORIENTACIONAFIL_AFIL')?.hasError('required')">
+              {{ sharedFb.errorRequired }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="  col-md-6 col-lg-4">
+          <mat-form-field class="w-100">
+            <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Hello world"
+              matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-label>Estado civil</mat-label>
+            <mat-select formControlName="NU_IDESTACIV_ESTADOCIV" required>
+              <mat-option *ngFor="let datoActual  of estadoCivilLst?.data
+                let i = index" [value]="datoActual.idPosition" [disabled]="!datoActual.habilitado">
+                {{datoActual.txValor}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="formularioAfiliados.get('NU_IDESTACIV_ESTADOCIV')?.hasError('required')">
+              {{ sharedFb.errorRequired }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+
+        <div class="  col-md-6 col-lg-4">
+          <mat-form-field class="w-100">
+            <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Hello world"
+              matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-label>Tipo de sangre</mat-label>
+            <mat-select formControlName="NU_IDTIPOSANGRE_TIPOSANGRE" required>
+              <mat-option *ngFor="let datoActual  of tipoSangreLst?.data
+                let i = index" [value]="datoActual.idPosition" [disabled]="!datoActual.habilitado">
+                {{datoActual.txValor}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="formularioAfiliados.get('NU_IDTIPOSANGRE_TIPOSANGRE')?.hasError('required')">
+              {{ sharedFb.errorRequired }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+
+        <div class="  col-md-6 col-lg-4">
+          <mat-form-field class="w-100">
+            <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Hello world"
+              matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-label>RH</mat-label>
+            <mat-select formControlName="NU_IDRH_RHS" required>
+              <mat-option *ngFor="let datoActual  of rhLst?.data
+                let i = index" [value]="datoActual.idPosition" [disabled]="!datoActual.habilitado">
+                {{datoActual.txValor}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="formularioAfiliados.get('NU_IDRH_RHS')?.hasError('required')">
+              {{ sharedFb.errorRequired }}
+            </mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <div class="  col-md-6 col-lg-4">
+          <mat-form-field class="w-100">
+            <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Hello world"
+              matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-label>Escolaridad</mat-label>
+            <mat-select formControlName="NU_IDESCOLARI_ESCOLARIDAD" required>
+              <mat-option *ngFor="let datoActual  of escolaridadesLst?.data
+                let i = index" [value]="datoActual.idPosition" [disabled]="!datoActual.habilitado">
+                {{datoActual.txValor}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="formularioAfiliados.get('NU_IDESCOLARI_ESCOLARIDAD')?.hasError('required')">
+              {{ sharedFb.errorRequired }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="  col-md-6 col-lg-4">
+          <mat-form-field class="w-100">
+            <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Hello world"
+              matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-label>EPS anterior</mat-label>
+            <mat-select formControlName="NU_IDEPS_EPSS" required>
+              <mat-option *ngFor="let datoActual  of epsAnteriorLst?.data
+                let i = index" [value]="datoActual.idPosition" [disabled]="!datoActual.habilitado">
+                {{datoActual.txValor}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="formularioAfiliados.get('NU_IDEPS_EPSS')?.hasError('required')">
+              {{ sharedFb.errorRequired }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="  col-md-6 col-lg-4">
+          <mat-form-field class="w-100">
+            <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Hello world"
+              matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-label>Régimen</mat-label>
+            <mat-select formControlName="NU_IDREGIMEN_REGIMEN" required>
+              <mat-option *ngFor="let datoActual  of regimenLst?.data
+                let i = index" [value]="datoActual.idPosition" [disabled]="!datoActual.habilitado">
+                {{datoActual.txValor}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="  col-md-6 col-lg-4">
+          <mat-form-field class="w-100">
+            <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Hello world"
+              matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-label>Ocupación</mat-label>
+            <mat-select formControlName="NU_IDOCUPACION_OCUPACION" required>
+              <mat-option *ngFor="let datoActual  of ocupacionesLst?.data
+                let i = index" [value]="datoActual.idPosition" [disabled]="!datoActual.habilitado">
+                {{datoActual.txValor}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="  col-md-6 col-lg-4">
+          <mat-form-field class="w-100">
+            <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Hello world"
+              matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-label>Fondo de pensiones</mat-label>
+            <mat-select formControlName="NU_IDFONDPENSI_FONPENSI" required>
+              <mat-option *ngFor="let datoActual  of fondoPensionesLst?.data
+                let i = index" [value]="datoActual.idPosition" [disabled]="!datoActual.habilitado">
+                {{datoActual.txValor}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="  col-md-6 col-lg-4">
+          <mat-form-field class="w-100">
+            <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Hello world"
+              matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-label>Sede UN</mat-label>
+            <mat-select (valueChange)="dependenciaUn($event)">
+              <mat-option *ngFor="let datoActual  of sedesLst?.data
+                let i = index" [value]="datoActual.idPosition" [disabled]="!datoActual.habilitado">
+                {{datoActual.txValor}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="  col-md-6 col-lg-4">
+          <mat-form-field class="w-100">
+            <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Hello world"
+              matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-label>Dependencia UN</mat-label>
+            <mat-select formControlName="NU_IDDEPENDENC_DEPENDENC" required>
+              <mat-option *ngFor="let datoActual  of dependenciasLst[sedeSeleccionada]?.data
+                let i = index" [value]="datoActual.idPosition" [disabled]="!datoActual.habilitado">
+                {{datoActual.txValor}}
+              </mat-option>
+            </mat-select>
+            <!-- <mat-error *ngIf="sedeSeleccionada == -1">
+              Debe seleccionar Sede UN
+            </mat-error> -->
+            <mat-hint *ngIf="formularioAfiliados.get('NU_IDDEPENDENC_DEPENDENC')?.disabled">
+              Debe seleccionar Sede UN
+            </mat-hint>
+
+            <mat-error
+              *ngIf="formularioAfiliados.get('NU_IDDEPENDENC_DEPENDENC')?.hasError('required')">
+              {{ sharedFb.errorRequired }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+
+        <!-- <div class="  col-md-6 col-lg-4">
+          <mat-form-field class="w-100">
+            <mat-label>Tel o ext</mat-label>
+            <input matInput type="number" formControlName="NU_EXTENSION_AFIL"(keydown)="sharedFb.validarSoloNumero($event)">
+            <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Hello world"
+              matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+          </mat-form-field>
+        </div> -->
+
+        <div class="  col-md-6 col-lg-4">
+          <mat-form-field class="w-100">
+            <mat-label>Tel o ext</mat-label>
+            <input matInput type="number" formControlName="NU_EXTENSION_AFIL">
+            <button type="button" color="primary" matSuffix mat-icon-button
+              matTooltip="Ingrese solo números, sin puntos ni comas" matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-error *ngIf="formularioAfiliados.get('NU_EXTENSION_AFIL')?.hasError('required')">
+              {{ sharedFb.errorRequired }}
+            </mat-error>
+            <mat-error *ngIf="formularioAfiliados.get('NU_EXTENSION_AFIL')?.hasError('pattern')">
+              {{ sharedFb.errorSoloNumeros }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="  col-md-6 col-lg-4">
+          <mat-form-field class="w-100">
+            <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Hello world"
+              matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-label>Tipo de solicitud</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let datoActual  of tipoSolicitudesLst?.data
+                let i = index" [value]="datoActual.idPosition" [disabled]="!datoActual.habilitado">
+                {{datoActual.txValor}}
+              </mat-option>
+
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="  col-md-6 col-lg-4">
+          <mat-checkbox class="w-100" formControlName="NU_PENSIONADO_AFIL" color="primary">¿Es pensionado?
+            <button type="button" color="primary" matSuffix mat-icon-button matTooltip="¿Es pensionado?"
+              matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button> </mat-checkbox>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <mat-checkbox class="w-100" color="primary" (change)="checkboxDiscapacidades($event)">Discapacidad
+            <button type="button" color="primary" matSuffix mat-icon-button
+              matTooltip="¿Cuenta con alguna discapacidad?" matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+          </mat-checkbox>
+        </div>
+
+        <div class="col-12" *ngIf="this.formularioAfiliados.controls['TMP_DISCAPACIDADES'].enabled">
+          <mat-form-field class="w-100">
+            <mat-label>Discapacidad...</mat-label>
+            <mat-chip-list #chipList formControlName="TMP_DISCAPACIDADES">
+              <mat-chip *ngFor="let datoActual of discapacidadesSeleccionadas" (removed)="remove(datoActual)">
+                {{datoActual.txValor}}
+                <button matChipRemove>
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip>
+              <input  #fruitInput [formControl]="fruitCtrl" [matAutocomplete]="auto"
+                [matChipInputFor]="chipList" (matChipInputTokenEnd)="add($event)" >
+            </mat-chip-list>
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event); fruitInput.value=''" >
+              <!-- <mat-option *ngFor="let datoActual  of discapacidadLstFiltrado?.data
+                let i = index" [value]="datoActual" [disabled]="!datoActual.habilitado">
+                {{datoActual.txValor}}
+              </mat-option> -->
+              <mat-option *ngFor="let datoActual of filteredDiscapacidades | async" [value]="datoActual" >
+                {{datoActual.txValor}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+
+        <!-- <div class="col-6">
+          <mat-form-field class="w-100">
+            <input type="text" matInput [matAutocomplete]="auto2" [formControl]="fruitCtrl2">
+          </mat-form-field>
+          <mat-autocomplete #auto2="matAutocomplete" >
+            <mat-option *ngFor="let item of filteredOptions | async" [value]="item">
+              {{item.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </div> -->
+
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+
+
+<!-- <button (click)="test()">test</button> -->

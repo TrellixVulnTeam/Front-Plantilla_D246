@@ -1,0 +1,143 @@
+:host{
+  overflow: hidden;
+}
+
+
+.matTextInput{
+  width: 100px;
+}
+
+/*  no usado, para campos sin checkbox alinearlos con el checkbox
+.nonCheckboxField{
+  margin-left: 24px;
+} */
+
+.radioGroup{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.row{
+  margin: 0;
+  /* border: 1px solid red; */
+  /* width: 100%; */
+}
+
+.matField, .medicamentos{
+  width: 100%;
+  /* border: 1px solid black; */
+  font-size: 14px;
+}
+
+#test{
+  /* width: 100%; */
+  width: 300px;
+
+}
+.rowDatos{
+  height: 100%;
+}
+
+:host::ng-deep.mat-checkbox-layout{
+  white-space: normal !important;
+}
+
+:host::ng-deep.mat-checkbox-inner-container{
+    margin-top: 4px;
+}
+
+/* .col, .col-2, .col-10{
+  border: 2px solid purple;
+}
+
+.col-8, .col-2, .colColor {
+  border: 2px solid purple;
+  width: 100%;
+}
+
+
+
+form{
+  border: 1px solid green;
+} */
+
+
+
+
+.close-button{
+  float: right;
+  top:-24px;
+  right:-24px;
+  background-color: #f4f4f4;
+  box-shadow: none;
+  border: 2px solid #bbbbbb;
+}
+
+.close-icon {
+  transition: 1s ease-in-out;
+  color: gray;
+}
+
+.close-icon:hover {
+  transform: rotate(180deg);
+  color: gray;
+}
+
+mat-form-field{
+  font-size: 0.875rem;
+}
+
+::ng-deep .icon-outside .close-button{
+  float: right;
+  top:-40px;
+  right:-40px;
+}
+
+::ng-deep .icon-outside .mat-dialog-container {
+  overflow: unset;
+ }
+
+
+/* Dialog titulo */
+
+.dialog-title{
+  font-size: 15px;
+  border-bottom: 1.5px solid #bebebe;
+}
+
+
+.titulo-icono{
+  font-size: 50px;
+  vertical-align: middle;
+  color: rgb(76, 143, 197);
+}
+
+
+h1{
+  font-size: 19px;
+  padding-left: 35px;
+}
+
+/* Loading */
+
+
+.loading{
+  margin-inline: auto;
+}
+
+
+.icono-grande{
+  font-size: 6.25vw;
+  max-height:6.25vw;
+  max-width:6.25vw;
+  color: gray;
+}
+
+:host::ng-deep.mat-checkbox-layout{
+  white-space: normal !important;
+}
+
+:host::ng-deep.mat-checkbox-inner-container{
+    margin-top: 4px;
+}

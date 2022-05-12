@@ -1,0 +1,199 @@
+<button mat-mini-fab aria-label="close dialog" class="close-button" [mat-dialog-close]>
+  <!-- *ngIf="!enviandoInfo" -->
+  <mat-icon class="close-icon">close</mat-icon>
+</button>
+
+
+<div mat-dialog-title class="dialog-title">
+  <h1>DECLARATORIA DE SALUD</h1>
+</div>
+
+
+<mat-dialog-content>
+
+  <form [formGroup]="formDeclaratoria">
+    <!-- <ng-container>
+      {{formDeclaratoria.get('1') | json}}
+    </ng-container> -->
+
+    <div class="container">
+      <ng-container *ngFor="let pregunta of preguntas; let i = index;" [ngSwitch]="pregunta.tX_TIPOCAMPO_PREGDECL">
+
+
+        <div class="row justify-content-between mb-2">
+
+          <ng-container *ngSwitchCase=" 'radiobutton' " class="w-100">
+
+            <!-- <ng-container *ngIf="pregunta.tX_PREGUNTA_PREGDECL.includes('medicamento')" style="color: red;">
+              MEDICAMENTO
+            </ng-container> -->
+            <div *ngIf="pregunta.tX_PREGUNTA_PREGDECL.includes('medicamento') then medicamentos ; else normal">
+            </div>
+
+            <ng-template #normal>
+              <div class="col-sm-8 col-lg-9 col-xl-9">
+                {{pregunta.tX_PREGUNTA_PREGDECL}} &ensp;
+              </div>
+
+              <div class="col-sm-4 col-lg-3 col-xl-3 ">
+                <mat-radio-group class="radioGroup" color="primary" (change)="radioTest($event, i)">
+                  <mat-radio-button value=0>Sí</mat-radio-button>
+                  <mat-radio-button value=1>No</mat-radio-button>
+                  <mat-radio-button value=2>N/A</mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </ng-template>
+
+            <ng-template #medicamentos>
+              <div class="row medicamentos">
+                <div class="col-sm-8 col-lg-9 col-xl-9">
+                  {{pregunta.tX_PREGUNTA_PREGDECL}} &ensp;
+                </div>
+
+                <div class="col-sm-4 col-lg-3 col-xl-3 ">
+                  <!-- <ng-container >
+                    <mat-radio-group class="radioGroup" color="primary" (change)="muestraMedicamentos($event, i)">
+                      <mat-radio-button value=0>Sí</mat-radio-button>
+                      <mat-radio-button value=1>No</mat-radio-button>
+                      <mat-radio-button value=2>N/A</mat-radio-button>
+                    </mat-radio-group> -->
+
+
+                  <ng-container class="row  justify-content-between radioGroup" [formGroup]="getFb(pregunta.nU_IDPREGDECLA_DECLAFIL)">
+                    <mat-radio-group class="radioGroup" color="primary"  formControlName="respuesta" (change)="muestraMedicamentos($event, i)">
+                      <mat-radio-button value=0>Sí</mat-radio-button>
+                      <mat-radio-button value=1>No</mat-radio-button>
+                      <mat-radio-button value=2>N/A</mat-radio-button>
+                    </mat-radio-group>
+                  </ng-container>
+                </div>
+              </div>
+
+              <ng-container *ngIf="mostrarMedicamentos">
+                <div class="row medicamentos">
+
+                  <div class="col-6">
+
+                    Medicamentos //
+                    <!-- <mat-select-autocomplete id="test"
+                      selectPlaceholder="Seleccionar medicamentos"
+                      placeholder="Seleccionar medicamentos"
+                      [options]="listaMedicamentosProcesada"
+                      [selectedOptions]="selected"
+                      [multiple]='true' [labelCount]="1"
+                      [disabled]="selected.length > limiteMedicamentos"
+                      (selectionChange)="getSelectedOptions($event)">
+                    </mat-select-autocomplete> -->
+                  </div>
+
+                  <div class="col-2 w-100">
+                    <button mat-raised-button (click)="onResetSelection()" color="primary">Limpiar</button>
+                  </div>
+
+                  <div class="col-4 w-100">
+                    <div> Medicamentos seleccionadas:
+                      <span *ngFor="let option of selected; let index = index">
+                        {{option}}
+                        <span *ngIf="index != selected.length-1">, </span>
+                      </span>
+                    </div>
+                  </div>
+
+                </div>
+              </ng-container>
+
+            </ng-template>
+
+
+
+          </ng-container>
+
+          <ng-container *ngSwitchCase=" 'input.number' ">
+            <div class="col-sm-6 col-xl-9">
+              <div class="row align-items-center rowDatos">
+                {{pregunta.tX_PREGUNTA_PREGDECL}}
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-xl-3">
+              <ng-container [formGroup]="getFb(pregunta.nU_IDPREGDECLA_DECLAFIL)">
+                <mat-form-field class="w-100">
+                  <input matInput type="number" placeholder="ingresar numero" formControlName="respuesta">
+                  <mat-error *ngIf="getFb(pregunta.nU_IDPREGDECLA_DECLAFIL).get('respuesta')?.hasError('required')">
+                    {{ 'Este campo es obligatorio'}}
+                  </mat-error>
+                </mat-form-field>
+              </ng-container>
+            </div>
+
+          </ng-container>
+
+          <ng-container *ngSwitchCase=" 'input.date' " class="w-100">
+
+            <div class="col-sm-6 col-xl-9">
+              <div class="row align-items-center rowDatos">
+                {{pregunta.tX_PREGUNTA_PREGDECL}}
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-xl-3">
+              <ng-container [formGroup]="getFb(pregunta.nU_IDPREGDECLA_DECLAFIL)">
+                <mat-form-field class="w-100">
+                  <mat-label>Fecha de nacimiento</mat-label>
+                  <!-- formControlName="FE_FECHANACIMIENTO_AFIL" -->
+                  <input matInput [matDatepicker]="datePicker" required readonly formControlName="respuesta">
+                  <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #datePicker></mat-datepicker>
+                  <!-- <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Hello world"
+                  matTooltipPosition="above" (click)="null">
+                  <mat-icon>help</mat-icon>
+                </button> -->
+                  <mat-error *ngIf="getFb(pregunta.nU_IDPREGDECLA_DECLAFIL).get('respuesta')?.hasError('required')">
+                    {{ 'Este campo es obligatorio'}}
+                  </mat-error>
+                </mat-form-field>
+              </ng-container>
+
+            </div>
+          </ng-container>
+
+          <ng-container *ngSwitchCase=" 'checkbox' ">
+            <ng-container [formGroup]="getFb(pregunta.nU_IDPREGDECLA_DECLAFIL)">
+              <mat-checkbox class="w-100" color="primary" formControlName="respuesta">
+                {{pregunta.tX_PREGUNTA_PREGDECL}}
+              </mat-checkbox>
+            </ng-container>
+          </ng-container>
+
+        </div>
+
+      </ng-container>
+    </div>
+
+  </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+
+
+  <!-- Valores: {{formDeclaratoria.value | json}}
+  <br>
+  <hr>-->
+  <!-- Is Valid? {{formAutorizaciones.valid}}
+
+  Valores: {{formAutorizaciones.value | json}} <br>
+  <br>Errores: <br>
+
+  pregunta1: {{formAutorizaciones.controls.pregunta1.errors| json}} &emsp;
+  pregunta2: {{formAutorizaciones.controls.pregunta2.errors| json}} &emsp;
+  pregunta3: {{formAutorizaciones.controls.pregunta3.errors| json}} &emsp;
+  pregunta4: {{formAutorizaciones.controls.pregunta4.errors| json}} &emsp;
+  pregunta5: {{formAutorizaciones.controls.pregunta5.errors| json}} &emsp; -->
+
+  <!-- <button mat-flat-button (click)="imprimir()" color="primary">imprimir</button> -->
+
+  <button mat-flat-button (click)="test2()"  [disabled]="formDeclaratoria.invalid" color="primary">Guardar</button>
+  <!-- <button mat-flat-button [disabled]="formDeclaratoria.invalid" [mat-dialog-close]="true"
+    color="primary">Guardar</button> -->
+</mat-dialog-actions>

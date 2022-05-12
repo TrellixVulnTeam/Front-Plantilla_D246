@@ -1,0 +1,140 @@
+<button mat-mini-fab aria-label="close dialog" class="close-button" [mat-dialog-close]="false">
+  <mat-icon class="close-icon">close</mat-icon>
+</button>
+
+
+<div mat-dialog-title class="dialog-title">
+  <h1>DECLARACIÓN BAJO GRAVEDAD DE JURAMENTO</h1>
+</div>
+
+
+<mat-dialog-content>
+
+  <form [formGroup]="formDeclaracionJuramento">
+
+    <!-- <ng-container [formGroup]="formPregunta1Compuesta">
+
+    </ng-container> -->
+    <div class="row align-items-center mb-2">
+
+      <mat-checkbox class="matField" color="primary" formControlName="selected" (change)="selectedPregunta1($event)">
+        1. Declaro que convivo con el (la) señor(a)
+      </mat-checkbox>
+
+      <mat-form-field class="matField">
+        <input matInput type="text" formControlName="nombre" placeholder="Nombre">
+        <mat-error *ngIf="formDeclaracionJuramento.get('nombre')?.hasError('required')">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-label class="matField">identificado (a) con</mat-label>
+
+      <mat-form-field class="matField">
+        <mat-label>Tipo de identificación</mat-label>
+        <mat-select formControlName="tipoIdentificacion" (valueChange)="habilitarNumeroIdentificacion()">
+          <mat-option *ngFor="let datoActual  of tipoIdentificacion?.data
+            let i = index" [value]="datoActual.idPosition" [disabled]="!datoActual.habilitado">
+              {{datoActual.txValor}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="formDeclaracionJuramento.get('tipoIdentificacion')?.hasError('required')">
+            Este campo es obligatorio
+          </mat-error>
+      </mat-form-field>
+
+      <mat-label class="matField">No. </mat-label>
+
+      <mat-form-field class="matField" *ngIf="!permitirLetrasNumIdentificacion">
+        <input matInput type="number" placeholder="Número de identificación" formControlName="numeroIdentificacion">
+        <mat-error *ngIf="formDeclaracionJuramento.get('numeroIdentificacion')?.hasError('required')">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field class="matField" *ngIf="permitirLetrasNumIdentificacion">
+        <input matInput type="text" placeholder=" **Número de identificación" formControlName="numeroIdentificacion">
+        <mat-error *ngIf="formDeclaracionJuramento.get('numeroIdentificacion')?.hasError('required')">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-label class="matField">desde</mat-label>
+
+      <mat-form-field class="matField">
+        <mat-label>Fecha de convivencia</mat-label>
+        <input matInput  [matDatepicker]="datePicker"
+          formControlName="desde" required readonly>
+        <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+        <mat-datepicker #datePicker></mat-datepicker>
+        <mat-error *ngIf="formDeclaracionJuramento.get('desde')?.hasError('required')">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div class="row align-items-center mb-2">
+      <mat-checkbox class="matField" color="primary" formControlName="pregunta2">
+        2. Declaro que las personas inscritas como beneficiarios dependen económicamente de mi.
+      </mat-checkbox>
+    </div>
+
+    <div class="row align-items-center mb-2">
+      <mat-checkbox class="matField" color="primary" formControlName="pregunta3">
+        3. Declaro que la elección de afiliarme a este servicio de salud es informada, libre y espontánea
+      </mat-checkbox>
+    </div>
+
+    <div class="row align-items-center mb-2">
+      <mat-checkbox class="matField " color="primary" formControlName="pregunta4">
+        4. Declaro que no estoy inscrito como afiliado ni beneficiario a otro Sistema de Seguridad Social en Salud, en
+        relación con el Plan Obligatorio de Salud
+      </mat-checkbox>
+    </div>
+
+    <div class="row align-items-center mb-2">
+      <mat-checkbox class="matField" color="primary" formControlName="pregunta5">
+        5. Declaro que la información por mi consignada en el presente formato es verídica; especialmente en lo relativo
+        a la conformación de mi grupo familiar
+      </mat-checkbox>
+    </div>
+
+    <div class="row align-items-center mb-2">
+      <mat-checkbox class="matField" color="primary" formControlName="pregunta6">
+        6. Declaro que mi(s) beneficiario(s) no presentan estados de multiafiliación con otra Empresa Aseguradora de
+        planes de Beneficios (EAPB)
+      </mat-checkbox>
+    </div>
+
+    <div class="row align-items-center mb-2">
+      <mat-checkbox class="matField" color="primary" formControlName="pregunta7">
+        7. Declaro que he sido informado claramente de la normatividad aplicable a Unisalud, el plan de beneficios y he
+        recibido instrucciones para la consulta de la guía del usuario, el formato de declaratoria de salud y asesoría
+        para la solicitud de la evaluación de gestión del riesgo
+      </mat-checkbox>
+    </div>
+
+    <div class="row align-items-center mb-2">
+      <mat-checkbox class="matField" color="primary" formControlName="pregunta8">
+        8. Declaro que por todo ingreso adicional que perciba informaré a Unisalud y efectuaré el correspondiente aporte
+        en la forma definida en la normativa aplicable
+      </mat-checkbox>
+    </div>
+
+    <div class="row align-items-center">
+      <mat-checkbox class="matField" color="primary" required formControlName="pregunta9">
+        9. Declaro que me comprometo a hacer buen uso de los servicios prestados por Unisalud y su red de adscritos en mi calidad de afiliado y darlo a conocer a mis beneficiarios bajo mi responsabilidad
+      </mat-checkbox>
+    </div>
+
+  </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <!-- <button mat-flat-button [mat-dialog-close]="true" color="primary">Guardar</button> -->
+  <button mat-flat-button [mat-dialog-close]="false" color="accent">No acepto</button>
+  <button mat-flat-button [disabled]="formDeclaracionJuramento.invalid" [mat-dialog-close]="true" cdkFocusInitial color="primary">Acepto</button>
+</mat-dialog-actions>

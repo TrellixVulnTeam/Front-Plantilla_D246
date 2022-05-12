@@ -1,0 +1,45 @@
+<!-- <button (click)="testBtn()">test</button> -->
+
+<ng-container [formGroup]="formArchivos">
+  <div class="form-fields">
+    <div class="container">
+      <div class="row">
+
+
+        <ng-container formArrayName="archivos">
+          <ng-container *ngFor="let pregunta of getArchivos.controls; let i=index;">
+
+            <div class="row  mb-2"  [formGroup]="getFormGroup(pregunta)">
+
+              <div class="col-sm-6">
+                <mat-form-field class="w-100">
+                  <input matInput readonly formControlName="TX_NOMBREARCHIVO">
+                  <mat-label>{{getFormGroup(pregunta).get('TX_TIPOARCHIVO')?.value}}</mat-label>
+                  <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Tooltip msg"
+                    matTooltipPosition="above">
+                    <mat-icon>help</mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+
+              <div class="col-sm-6">
+                <button mat-flat-button color="primary" type="button" (click)="inpCargarIdentidadAnverso.click()">
+                  Cargar archivo
+                  <input #inpCargarIdentidadAnverso type="file"
+                    accept="application/pdf"
+                    style="display:none;" data-max-size="2048"
+                    (change)="cargarArchivo($event, getFormGroup(pregunta).get('NU_IDTIPOARCHIVO_ARCH')?.value)" />
+                </button>
+              </div>
+            </div>
+
+          </ng-container>
+
+        </ng-container>
+
+      </div>
+    </div>
+  </div>
+
+
+</ng-container>

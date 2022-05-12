@@ -15,6 +15,14 @@ body{
   /* overflow-y: hidden; */
 }
 
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.row{
+  margin: 0;
+}
 
 *::-webkit-scrollbar {
   width: 9px;

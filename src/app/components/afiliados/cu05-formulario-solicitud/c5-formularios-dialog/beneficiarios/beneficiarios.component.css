@@ -1,0 +1,85 @@
+:host {
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+  /* flex-direction: row; */
+  background-color: white;
+  padding: 20px;
+  padding-left: 40px;
+  min-height: 80vh;
+  height: auto;
+  border-radius: 0 0 1rem 1rem;
+}
+
+hr{
+  background-color: gray;
+}
+
+.matField{
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  width: 100%;
+}
+
+.direccionCompuesta > .matField{
+  margin-right: 20px;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 25px;
+}
+
+
+/* table */
+
+table {
+  width: 100%;
+}
+
+
+/* ///////////// */
+.dialog-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.close-button{
+  float: right;
+  /* top:-50px;
+  right:-50px; */
+  background-color: lightgray;
+}
+
+.close-icon {
+  transition: 1s ease-in-out;
+  color: gray;
+}
+
+.close-icon:hover {
+  transform: rotate(180deg);
+  color: gray;
+}
+
+::ng-deep .icon-outside .close-button{
+  float: right;
+  top:-40px;
+  right:-40px;
+}
+
+::ng-deep .icon-outside .mat-dialog-container {
+  overflow: unset;
+ }
+
+/* Checkbox wrap */
+
+:host::ng-deep.mat-checkbox-layout {
+  white-space: normal !important;
+}
+
+:host::ng-deep.mat-checkbox-inner-container {
+  margin-top: 4px;
+}
+
+
+

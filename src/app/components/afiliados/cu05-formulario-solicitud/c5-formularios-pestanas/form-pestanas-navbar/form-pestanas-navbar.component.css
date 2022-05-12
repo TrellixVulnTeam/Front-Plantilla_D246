@@ -1,0 +1,38 @@
+/* :host {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: white;
+  padding: 20px;
+  padding-left: 40px;
+} */
+
+
+.navbar-bg{
+  background-color: rgb(81, 127, 185);
+}
+
+
+.tabMenu{
+  background-color: rgb(81, 127, 185);
+  border-radius: 0.3rem 0.3rem 1rem 1rem;
+}
+
+/* Styles for tab labels */
+.mat-tab-label {
+  /* background-color: cyan; */
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Styles for the active tab label */
+.mat-tab-label.mat-tab-label-active {
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
+  border-radius: 0.3rem 0.3rem 0 0;
+}
+
+/* Styles for the ink bar*/
+.mat-ink-bar {
+  background-color: white;
+}
+

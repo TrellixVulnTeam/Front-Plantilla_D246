@@ -1,0 +1,211 @@
+<button mat-mini-fab aria-label="close dialog" class="close-button" [mat-dialog-close]>
+  <!-- *ngIf="!enviandoInfo" -->
+  <mat-icon class="close-icon">close</mat-icon>
+</button>
+
+
+<div mat-dialog-title class="dialog-title">
+  <h1>DECLARATORIA DE SALUD</h1>
+</div>
+
+
+<mat-dialog-content>
+
+  <form [formGroup]="formDeclaratoria">
+    <!-- <ng-container>
+      {{formDeclaratoria.get('1') | json}}
+    </ng-container> -->
+
+    <div class="container">
+      <div formArrayName="preguntasDeclaratorias">
+
+        <div *ngFor="let pregunta of getPreguntas.controls; let i=index;" [ngSwitch]="pregunta.get('tx_tipocampo')?.value" >
+
+
+          <!-- <ng-container [formGroup]="getFormGroup(pregunta)">
+              <input type="text" formControlName="tx_tipocampo">
+          </ng-container> -->
+          <div class="row justify-content-between mb-2"  [formGroup]="getFormGroup(pregunta)">
+
+            <!-- <ng-container formGroupName="pregunta"> -->
+
+            <ng-container *ngSwitchCase=" 'radiobutton' " class="w-100">
+
+              <ng-container *ngIf="pregunta.get('tx_pregunta')?.value.includes('medicamento')" >
+              </ng-container>
+
+
+              <div *ngIf="pregunta.get('tx_pregunta')?.value.includes('medicamento') then medicamentos ; else normal">
+              </div>
+
+              <ng-template #normal>
+                <div class="col-sm-8 col-lg-9 col-xl-9">
+                  {{pregunta.get('tx_pregunta')?.value}} &ensp;
+                </div>
+
+                <div class="col-sm-4 col-lg-3 col-xl-3 " >
+                  <mat-radio-group class="radioGroup" color="primary" (change)="radioTest($event, i)" formControlName="NU_RESPUESTAPREGUNTA">
+                    <mat-radio-button value=0>Sí</mat-radio-button>
+                    <mat-radio-button value=1>No</mat-radio-button>
+                    <mat-radio-button value=2>N/A</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+
+              </ng-template>
+
+              <ng-template #medicamentos>
+                <div class="row medicamentos">
+                  <div class="col-sm-8 col-lg-9 col-xl-9">
+                    {{pregunta.get('tx_pregunta')?.value}} &ensp;
+                  </div>
+
+                  <div class="col-sm-4 col-lg-3 col-xl-3 ">
+                    <!-- <ng-container >
+                      <mat-radio-group class="radioGroup" color="primary" (change)="muestraMedicamentos($event, i)">
+                        <mat-radio-button value=0>Sí</mat-radio-button>
+                        <mat-radio-button value=1>No</mat-radio-button>
+                        <mat-radio-button value=2>N/A</mat-radio-button>
+                      </mat-radio-group> -->
+
+
+                    <ng-container class="row  justify-content-between radioGroup">
+                      <mat-radio-group class="radioGroup" color="primary"  (change)="muestraMedicamentos($event, i)" formControlName="NU_RESPUESTAPREGUNTA">
+                        <mat-radio-button value=0>Sí</mat-radio-button>
+                        <mat-radio-button value=1>No</mat-radio-button>
+                        <mat-radio-button value=2>N/A</mat-radio-button>
+                      </mat-radio-group>
+                    </ng-container>
+                  </div>
+                </div>
+
+                <ng-container *ngIf="mostrarMedicamentos">
+                  <div class="row medicamentos">
+
+                    <div class="col-12">
+
+                      <mat-form-field class="w-100">
+                        <mat-label>Medicamentos...</mat-label>
+                        <mat-chip-list #chipList >
+                          <mat-chip *ngFor="let datoActual of medicamentosSeleccionados" (removed)="remove(datoActual)">
+                            {{datoActual.nombreMedicamento}}
+                            <button matChipRemove>
+                              <mat-icon>cancel</mat-icon>
+                            </button>
+                          </mat-chip>
+                          <input  #fruitInput [formControl]="fruitCtrl" [matAutocomplete]="auto"
+                            [matChipInputFor]="chipList" (matChipInputTokenEnd)="add($event)" >
+                        </mat-chip-list>
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event); fruitInput.value=''" >
+                          <mat-option *ngFor="let datoActual of filteredDiscapacidades | async" [value]="datoActual" >
+                            {{datoActual.nombreMedicamento}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+
+                    </div>
+                  </div>
+                </ng-container>
+
+              </ng-template>
+
+
+
+            </ng-container>
+
+            <ng-container *ngSwitchCase=" 'input.number' ">
+              <div class="col-sm-6 col-xl-9">
+                <div class="row align-items-center rowDatos">
+                  {{pregunta.get('tx_pregunta')?.value}}
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-xl-3">
+                <ng-container >
+                  <mat-form-field class="w-100">
+                    <input matInput type="number" placeholder="ingresar numero"  formControlName="NU_RESPUESTAPREGUNTA">
+                    <!-- <mat-error *ngIf="getFb(pregunta.nU_IDPREGDECLA_DECLAFIL).get('respuesta')?.hasError('required')">
+                      {{ 'Este campo es obligatorio'}}
+                    </mat-error> -->
+                  </mat-form-field>
+                </ng-container>
+              </div>
+
+            </ng-container>
+
+            <ng-container *ngSwitchCase=" 'input.date' " class="w-100">
+
+              <div class="col-sm-6 col-xl-9">
+                <div class="row align-items-center rowDatos">
+                  {{pregunta.get('tx_pregunta')?.value}}
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-xl-3">
+                <!-- [formGroup]="getFb(pregunta.nU_IDPREGDECLA_DECLAFIL)" -->
+                <ng-container >
+                  <mat-form-field class="w-100">
+                    <mat-label>Seleccione una fecha</mat-label>
+                    <!-- formControlName="FE_FECHANACIMIENTO_AFIL" -->
+                    <input matInput [matDatepicker]="datePicker" required readonly formControlName="NU_RESPUESTAPREGUNTA">
+                    <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #datePicker></mat-datepicker>
+                    <!-- <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Hello world"
+                    matTooltipPosition="above" (click)="null">
+                    <mat-icon>help</mat-icon>
+                  </button> -->
+                    <!-- <mat-error *ngIf="getFb(pregunta.nU_IDPREGDECLA_DECLAFIL).get('respuesta')?.hasError('required')">
+                      {{ 'Este campo es obligatorio'}}
+                    </mat-error> -->
+                  </mat-form-field>
+                </ng-container>
+
+              </div>
+            </ng-container>
+
+            <ng-container *ngSwitchCase=" 'checkbox' ">
+              <ng-container >
+                <mat-checkbox class="w-100" color="primary"  formControlName="NU_RESPUESTAPREGUNTA">
+                  {{pregunta.get('tx_pregunta')?.value}}
+                </mat-checkbox>
+              </ng-container>
+            </ng-container>
+
+          </div>
+
+
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+
+
+  <!-- Valores: {{formDeclaratoria.value | json}}
+  <br>
+  <hr>-->
+  <!-- Is Valid? {{formAutorizaciones.valid}}
+
+  Valores: {{formAutorizaciones.value | json}} <br>
+  <br>Errores: <br>
+
+  pregunta1: {{formAutorizaciones.controls.pregunta1.errors| json}} &emsp;
+  pregunta2: {{formAutorizaciones.controls.pregunta2.errors| json}} &emsp;
+  pregunta3: {{formAutorizaciones.controls.pregunta3.errors| json}} &emsp;
+  pregunta4: {{formAutorizaciones.controls.pregunta4.errors| json}} &emsp;
+  pregunta5: {{formAutorizaciones.controls.pregunta5.errors| json}} &emsp; -->
+
+  <!-- <button mat-flat-button (click)="imprimir()" color="primary">imprimir</button> -->
+
+  <button mat-flat-button (click)="test2()"  [disabled]="getPreguntas.invalid" color="primary">Guardar</button>
+  <!-- <button mat-flat-button (click)="imprimir()" color="accent">Print</button> -->
+  <!-- <button mat-flat-button [disabled]="formDeclaratoria.invalid" [mat-dialog-close]="true"
+    color="primary">Guardar</button> -->
+</mat-dialog-actions>

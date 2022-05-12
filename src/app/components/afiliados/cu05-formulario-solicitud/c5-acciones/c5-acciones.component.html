@@ -1,0 +1,22 @@
+<div class="acciones">
+
+  <button type="button" class="action-btn" (click)="guardar()" matTooltip="Guardar">
+    <mat-icon>save</mat-icon>
+  </button>
+
+  <button type="button" class="action-btn" (click)="menuBeneficiario()" matTooltip="Beneficiario">
+    <mat-icon>people</mat-icon>
+  </button>
+
+  <button type="button" class="action-btn" (click)="menuEmpleador()" matTooltip="Empleador">
+    <mat-icon>badge</mat-icon>
+  </button>
+
+  <button type="button" class="action-btn" (click)="enviar()" matTooltip="test enviar" *ngIf="mostrarTest">
+    <mat-icon>send</mat-icon>
+  </button>
+
+  <button type="button" class="action-btn" (click)="test()" matTooltip="IMPRIMIR" *ngIf="mostrarTest">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

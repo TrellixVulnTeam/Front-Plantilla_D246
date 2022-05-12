@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DisenoHeaderComponent } from './components/diseno-header/diseno-header.component';
-import { FullcalendarExampleComponent } from './components/fullcalendar-example/fullcalendar-example.component';
-import { PruebaInicialComponent } from './components/prueba-inicial/prueba-inicial.component';
+import { Cu03SolicitudesAfiliacionesComponent } from './components/afiliados/cu03-solicitudes-afiliaciones/cu03-solicitudes-afiliaciones.component';
+import { Cu05FormularioSolicitudComponent } from './components/afiliados/cu05-formulario-solicitud/cu05-formulario-solicitud.component';
 
 const routes: Routes = [
-  {path: 'PruebaInicial', component: PruebaInicialComponent},
-  {path: 'Buscador', component: DisenoHeaderComponent},
-  {path: 'Fullcalendar', component: FullcalendarExampleComponent}
+
+  {path: 'SolicitudesAfiliacion', component: Cu03SolicitudesAfiliacionesComponent},
+  {path: 'SolicitarAfiliacion', component: Cu05FormularioSolicitudComponent},
+
 ];
 
 @NgModule({

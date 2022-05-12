@@ -1,0 +1,57 @@
+.matTextInput{
+  width: 100px;
+}
+
+.matField{
+  /* border: 1px solid black; */
+  /* font-size: 14px; */
+}
+
+.row{
+  margin: 0;
+  /* border: 1px solid red; */
+  /* gap: 0.625rem; */
+  gap: 1ch;
+  width: 100%;
+}
+
+form{
+  /* border: 1px solid green; */
+  gap: 20px;
+}
+::ng-deep .icon-outside .close-button{
+  float: right;
+  top:-40px;
+  right:-40px;
+}
+
+::ng-deep .icon-outside .mat-dialog-container {
+  overflow: unset;
+ }
+
+:host::ng-deep.mat-checkbox-layout{
+  white-space: normal !important;
+}
+
+:host::ng-deep.mat-checkbox-inner-container{
+    margin-top: 4px;
+}
+
+.close-button{
+  float: right;
+  top:-24px;
+  right:-24px;
+  background-color: #f4f4f4;
+  box-shadow: none;
+  border: 2px solid #bbbbbb;
+}
+
+.close-icon {
+  transition: 1s ease-in-out;
+  color: gray;
+}
+
+.close-icon:hover {
+  transform: rotate(180deg);
+  color: gray;
+}

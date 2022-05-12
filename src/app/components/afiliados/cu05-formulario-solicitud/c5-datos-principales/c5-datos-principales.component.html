@@ -1,0 +1,329 @@
+<ng-container [formGroup]="formularioAfiliados">
+  <div class="form-fields">
+    <div class="container">
+      <div class="row">
+
+
+        <!-- <div class="col-12 col-md-6"> -->
+        <div class="col-12 col-md-6">
+          <mat-form-field class="w-100">
+            <mat-label>Tipo de identificación</mat-label>
+            <mat-select formControlName="NU_IDTIPOIDEN_TIPOIDEN" (valueChange)="habilitarNumeroIdentificacion()"
+              required>
+              <mat-option *ngFor="let datoActual  of tipoIdentificacion?.data
+              let i = index" [value]="datoActual.idPosition" [disabled]="!datoActual.habilitado">
+                {{datoActual.txValor}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="formularioAfiliados.get('NU_IDTIPOIDEN_TIPOIDEN')?.hasError('required')">
+              {{ sharedFb.errorRequired }}
+            </mat-error>
+            <mat-icon class="icono-ayuda" color="primary" matSuffix matTooltip="Mensaje de ayuda"
+                matTooltipPosition="above">help</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <ng-container *ngIf="!permitirLetrasNumIdentificacion" >
+          <div class="col-12 col-md-6">
+            <mat-form-field class="w-100">
+              <mat-label>No. de indentificación</mat-label>
+              <input matInput formControlName="TX_IDENTIFICACION_AFIL" type="number" required>
+              <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Número de identificación"
+                matTooltipPosition="above" (click)="null">
+                <mat-icon>help</mat-icon>
+              </button>
+              <mat-error *ngIf="formularioAfiliados.get('TX_IDENTIFICACION_AFIL')?.hasError('required')">
+                {{ sharedFb.errorRequired }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="permitirLetrasNumIdentificacion">
+          <div class="col-12 col-md-6">
+            <mat-form-field class="w-100">
+              <mat-label>No. de indentificación (pasaporte)</mat-label>
+              <input matInput formControlName="TX_IDENTIFICACION_AFIL" type="text" required>
+              <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Número de pasaporte"
+                matTooltipPosition="above" (click)="null">
+                <mat-icon>help</mat-icon>
+              </button>
+              <mat-error *ngIf="formularioAfiliados.get('TX_IDENTIFICACION_AFIL')?.hasError('required')">
+                {{ sharedFb.errorRequired }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </ng-container>
+
+        <div class="col-12 col-md-6">
+          <mat-form-field class="w-100">
+            <mat-label>Fecha de expedición</mat-label>
+            <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="fechaExpedicion"
+              formControlName="FE_FECHAEXPEDICION_AFIL" required readonly>
+            <mat-datepicker-toggle matSuffix [for]="fechaExpedicion"></mat-datepicker-toggle>
+            <mat-datepicker #fechaExpedicion></mat-datepicker>
+            <!-- <mat-error *ngIf="formularioAfiliados.get('TX_IDENTIFICACION_AFIL')?.hasError('required')">
+              {{ sharedFb.errorRequired }}
+            </mat-error> -->
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <mat-form-field class="w-100">
+            <mat-label>Fecha de vencimiento</mat-label>
+            <input matInput [min]="maxDate" [matDatepicker]="fechaVencimiento"
+              formControlName="FE_FECHAVENCIMIENTO_AFIL" required readonly>
+            <mat-datepicker-toggle matSuffix [for]="fechaVencimiento"></mat-datepicker-toggle>
+            <mat-datepicker #fechaVencimiento></mat-datepicker>
+            <mat-error *ngIf="formularioAfiliados.get('FE_FECHAVENCIMIENTO_AFIL')?.hasError('required')">
+              {{ sharedFb.errorRequired }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <mat-form-field class="w-100">
+            <mat-label>Nombre identitario</mat-label>
+            <input matInput type="text" formControlName="TX_NOMIDENTI_AFIL">
+            <button type="button" color="primary" matSuffix mat-icon-button
+              matTooltip="Ingrese solo letras, no se permiten numeros ni acentos" matTooltipPosition="above"
+              (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-error *ngIf="formularioAfiliados.get('TX_NOMIDENTI_AFIL')?.hasError('pattern')">
+              {{ sharedFb.errorSoloLetras}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <mat-checkbox class="w-100" color="primary" (change)="mostrarListaConvenio($event)">
+            Convenio
+            <button type="button" color="primary" matSuffix mat-icon-button matTooltip="¿Convenio?"
+              matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+          </mat-checkbox>
+
+        </div>
+
+        <div class="col-12 col-md-6" *ngIf="formularioAfiliados.get('TX_ADMINEAPB_AFIL')?.enabled">
+          <mat-form-field class="w-100">
+            <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Administradora EABP"
+              matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-label>Administradora EABP</mat-label>
+            <!-- <mat-select formControlName="TX_ADMINEAPB_AFIL" (valueChange)="activarEabp()" #idAdminEabp> -->
+            <mat-select formControlName="TX_ADMINEAPB_AFIL" required (valueChange)="activarEabp();"
+            #idAdminEabp>
+              <mat-option *ngFor="let datoActual  of adminEAPB?.data;
+              let i = index" [value]="datoActual.idPosition" [disabled]="!datoActual.habilitado">
+                {{datoActual.txValor}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 col-md-6" *ngIf="formularioAfiliados.get('TX_NOMCONEAPB_AFIL')?.enabled">
+          <mat-form-field class="w-100">
+            <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Nombre del convenio"
+              matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-label>Nombre del convenio</mat-label>
+            <mat-select formControlName="TX_NOMCONEAPB_AFIL">
+              <mat-option *ngFor="let datoActual  of nombreConveniosLst[formularioAfiliados.get('TX_ADMINEAPB_AFIL')?.value].data
+              let i = index" [value]="datoActual.idPosition" [disabled]="!datoActual.habilitado">
+                {{datoActual.txValor}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <mat-form-field class="w-100">
+            <mat-label>Primer Apellido</mat-label>
+            <input matInput type="text" formControlName="TX_PRIMAPELLI_AFIL" required>
+            <button type="button" color="primary" matSuffix mat-icon-button
+              matTooltip="Ingrese solo letras, sin numeros ni acentos" matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-error *ngIf="formularioAfiliados.get('TX_PRIMAPELLI_AFIL')?.hasError('pattern')">
+              {{ sharedFb.errorSoloLetras }}
+            </mat-error>
+            <mat-error *ngIf="formularioAfiliados.get('TX_PRIMAPELLI_AFIL')?.hasError('required')">
+              {{ sharedFb.errorRequired }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <mat-form-field class="w-100">
+            <mat-label>Segundo Apellido</mat-label>
+            <input matInput type="text" formControlName="TX_SEGAPELLI_AFIL" >
+            <button type="button" color="primary" matSuffix mat-icon-button
+              matTooltip="Ingrese solo letras, sin numeros ni acentos" matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-error *ngIf="formularioAfiliados.get('TX_SEGAPELLI_AFIL')?.hasError('pattern')">
+              {{ sharedFb.errorSoloLetras }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <mat-form-field class="w-100">
+            <mat-label>Primer Nombre</mat-label>
+            <input matInput type="text" formControlName="TX_PRIMNOMBRE_AFIL" required>
+            <button type="button" color="primary" matSuffix mat-icon-button
+              matTooltip="Ingrese solo letras, sin numeros ni acentos" matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-error *ngIf="formularioAfiliados.get('TX_PRIMNOMBRE_AFIL')?.hasError('pattern')">
+              {{ sharedFb.errorSoloLetras }}
+            </mat-error>
+            <mat-error *ngIf="formularioAfiliados.get('TX_PRIMNOMBRE_AFIL')?.hasError('required')">
+              {{ sharedFb.errorRequired }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <mat-form-field class="w-100">
+            <mat-label>Segundo Nombre</mat-label>
+            <input matInput type="text" formControlName="TX_SEGNOMBRE_AFIL" >
+            <button type="button" color="primary" matSuffix mat-icon-button
+              matTooltip="Ingrese solo letras, sin numeros ni acentos" matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-error *ngIf="formularioAfiliados.get('TX_SEGNOMBRE_AFIL')?.hasError('pattern')">
+              {{ sharedFb.errorSoloLetras }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <mat-form-field class="w-100">
+            <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Hello world"
+              matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-label>Sexo</mat-label>
+            <mat-select formControlName="NU_IDGENERO_GENEROS" required>
+              <mat-option *ngFor="let dato  of sexoLista?.data
+                let i = index" [value]="dato.idPosition" [disabled]="!dato.habilitado">
+                  {{dato.txValor}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="formularioAfiliados.get('NU_IDGENERO_GENEROS')?.hasError('required')">
+              {{ sharedFb.errorRequired}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <mat-form-field class="w-100">
+            <mat-label>Fecha de nacimiento</mat-label>
+            <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="fechaNacimiento"
+              formControlName="FE_FECHANACIMIENTO_AFIL" (dateChange)="calcularEdad($event)" required readonly>
+            <mat-datepicker-toggle matSuffix [for]="fechaNacimiento"></mat-datepicker-toggle>
+            <mat-datepicker #fechaNacimiento></mat-datepicker>
+            <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Hello world"
+              matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-error *ngIf="formularioAfiliados.get('FE_FECHANACIMIENTO_AFIL')?.hasError('required')">
+              {{ sharedFb.errorRequired}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <ng-container [formGroup]="formularioLocal">
+          <div class="col-12 col-md-6">
+            <mat-form-field class="w-100">
+              <mat-label>Edad</mat-label>
+              <input matInput type="text" formControlName="edadCalculada" readonly>
+              <mat-hint>Campo generado automáticamente</mat-hint>
+            </mat-form-field>
+          </div>
+        </ng-container>
+
+        <div class="col-12 col-md-6">
+          <mat-form-field class="w-100">
+            <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Hello world"
+              matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-label>Nacionalidad</mat-label>
+            <mat-select formControlName="NU_IDNACIONALI_NACIONALI" required>
+              <mat-option *ngFor="let datoActual  of nacionalidades?.data;
+              let i = index" [value]="datoActual.idPosition" [disabled]="!datoActual.habilitado">
+                {{datoActual.txValor}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="formularioAfiliados.get('NU_IDNACIONALI_NACIONALI')?.hasError('required')">
+              {{ sharedFb.errorRequired}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <mat-form-field class="w-100">
+            <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Hello world"
+              matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-label>Grupo Poblacional</mat-label>
+            <mat-select multiple (valueChange)="agregarGrupoPoblacional($event)">
+              <mat-option *ngFor="let datoActual  of grupoPoblacional?.data
+                let i = index" [value]="datoActual.idPosition" [disabled]="!datoActual.habilitado">
+                  {{datoActual.txValor}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <mat-form-field class="w-100">
+            <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Hello world"
+              matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+            <mat-label>Grupo étnico</mat-label>
+            <mat-select formControlName="NU_IDGRUPOET_GRUPOET" required>
+              <mat-option *ngFor="let datoActual  of grupoEtnico?.data
+                let i = index" [value]="datoActual.idPosition" [disabled]="!datoActual.habilitado">
+                  {{datoActual.txValor}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="formularioAfiliados.get('NU_IDGRUPOET_GRUPOET')?.hasError('required')">
+              {{ sharedFb.errorRequired }}
+            </mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <div class="col-12 col-md-6">
+          <mat-form-field class="w-100">
+            <mat-label>Fecha de vinculación UNAL</mat-label>
+            <input matInput [value]="maxDate" [matDatepicker]="fechaVinculacionUnal" readonly="">
+            <mat-datepicker #fechaVinculacionUnal></mat-datepicker>
+            <button type="button" color="primary" matSuffix mat-icon-button matTooltip="Fecha de vinculación UNAL"
+              matTooltipPosition="above" (click)="null">
+              <mat-icon>help</mat-icon>
+            </button>
+          </mat-form-field>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+
+  </div>
+
+</ng-container>
